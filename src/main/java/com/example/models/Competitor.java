@@ -1,0 +1,159 @@
+package com.example.models;
+
+import com.sun.istack.NotNull;
+import java.io.Serializable;
+import java.util.Calendar;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
+import org.eclipse.persistence.nosql.annotations.NoSql;
+
+@NoSql(dataFormat = DataFormatType.MAPPED)
+@Entity
+@XmlRootElement
+public class Competitor implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
+    @Field(name = "_id")
+    private String id;
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    private Calendar createdAt;
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    private Calendar updatedAt;
+
+    private String name;
+    private String surname;
+    private int age;
+    private String telephone;
+    private String cellphone;
+    private String address;
+    private String city;
+    private String country;
+    private boolean winner;
+
+    public Competitor() {
+    }
+
+    @PreUpdate
+    private void updateTimestamp() {
+        this.updatedAt = Calendar.getInstance();
+    }
+
+    @PrePersist
+    private void creationTimestamp() {
+        this.createdAt = this.updatedAt = Calendar.getInstance();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Calendar getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Calendar createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Calendar getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Calendar updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public void setWinner(boolean winner) {
+        this.winner = winner;
+    }
+}
