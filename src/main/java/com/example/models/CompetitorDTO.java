@@ -5,6 +5,8 @@ package com.example.models;
  */
 public class CompetitorDTO {
 
+    private ProductDTO product;
+
     private String name;
     private String surname;
     private int age;
@@ -88,5 +90,13 @@ public class CompetitorDTO {
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public ProductDTO getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
 }

@@ -20,6 +20,9 @@ import org.eclipse.persistence.nosql.annotations.DataFormatType;
 import org.eclipse.persistence.nosql.annotations.Field;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
+
 @NoSql(dataFormat = DataFormatType.MAPPED)
 @Entity
 @XmlRootElement
@@ -50,6 +53,9 @@ public class Competitor implements Serializable {
     //
     @Embedded
     private Vehicle vehicle;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Product product;
 
     public Competitor() {
     }
@@ -150,5 +156,13 @@ public class Competitor implements Serializable {
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
