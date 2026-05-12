@@ -43,11 +43,13 @@ public class CompetitorService {
     }
 
     @POST
-    @Path("/add")
+    @Path("/vehicle")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createCompetitor(CompetitorDTO competitor) {
 
-        EntityManager em = PersistenceManager.getInstance()
+        EntityManager entityManager = PersistenceManager
+                .getInstance()
                 .getEntityManagerFactory()
                 .createEntityManager();
 
@@ -64,13 +66,16 @@ public class CompetitorService {
         c.setSurname(competitor.getSurname());
         c.setTelephone(competitor.getTelephone());
 
+        // NUEVO
+        c.setVehicle(competitor.getVehicle());
+
         try {
 
-            em.getTransaction().begin();
+            entityManager.getTransaction().begin();
 
-            em.persist(c);
+            entityManager.persist(c);
 
-            em.getTransaction().commit();
+            entityManager.getTransaction().commit();
 
             rta.put("competitor_id", c.getId());
 
@@ -78,13 +83,16 @@ public class CompetitorService {
 
             t.printStackTrace();
 
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
             }
+
+            c = null;
 
         } finally {
 
-            em.close();
+            entityManager.clear();
+            entityManager.close();
         }
 
         return Response.status(200)

@@ -3,6 +3,8 @@ package com.example.models;
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,20 +26,18 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 public class Competitor implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue
     @Field(name = "_id")
     private String id;
-
     @NotNull
+    @Column(name = "create_at", updatable = false)
     @Temporal(TemporalType.DATE)
     private Calendar createdAt;
-
     @NotNull
+    @Column(name = "updated_at")
     @Temporal(TemporalType.DATE)
     private Calendar updatedAt;
-
     private String name;
     private String surname;
     private int age;
@@ -47,6 +47,9 @@ public class Competitor implements Serializable {
     private String city;
     private String country;
     private boolean winner;
+    //
+    @Embedded
+    private Vehicle vehicle;
 
     public Competitor() {
     }
@@ -67,22 +70,6 @@ public class Competitor implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Calendar getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Calendar createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Calendar getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Calendar updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public String getName() {
@@ -155,5 +142,13 @@ public class Competitor implements Serializable {
 
     public void setWinner(boolean winner) {
         this.winner = winner;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 }
