@@ -1,0 +1,60 @@
+Laboratorio Mongo DB
+
+MongoDB
+
+Empezar la shell y mongo:
+
+cd "C:\Program Files\MongoDB\Server\3.6\bin"
+mongod --dbpath "C:\data\db"
+
+Nuevo CMD: mongo
+
+2. Entrar a la Base de datos:
+
+use ArquiSW
+db ---> Confirmar la db.
+
+3. Después del POST, evidenciar los resultados.
+
+show collections
+db.COMPETITOR.find()
+
+4. Verificar Producto
+
+show collections
+db.PRODUCT.find()
+
+
+POSTMAN
+
+Hacer el POST.
+
+http://localhost:8080/competitors/vehicle
+
+{
+ "name": "Mauricio",
+ "surname": "Gomez",
+ "address":"Calle 42 #18",
+ "age": 20,
+ "telephone": "7659675",
+ "cellphone": "3002345436",
+ "city": "Bogota",
+ "country": "Colombia",
+ "vehicle":{
+ "plate":"TRE-465",
+ "brand":"BMW",
+ "modelYear":345
+ }
+ } 
+
+2. Evidenciar en el GET
+
+   GET http://localhost:8080/competitors/vehicle
+
+3. Evidenciar Competitor A
+
+   GET http://localhost:8080/competitors/a
+
+4. Evidenciar Productos creados.
+
+   GET http://localhost:8080/products
